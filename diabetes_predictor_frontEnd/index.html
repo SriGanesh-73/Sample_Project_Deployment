@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+</head>
+<body>
+    <h2>Diabetes Prediction</h2>
+    <form id="diabetesForm">
+        <label>Pregnancies:</label><input type="number" id="pregnancies"><br>
+        <label>Glucose:</label><input type="number" id="glucose"><br>
+        <label>Blood Pressure:</label><input type="number" id="bp"><br>
+        <label>Skin Thickness:</label><input type="number" id="skin"><br>
+        <label>Insulin:</label><input type="number" id="insulin"><br>
+        <label>BMI:</label><input type="number" id="bmi"><br>
+        <label>Diabetes Pedigree Function:</label><input type="number" id="dpf"><br>
+        <label>Age:</label><input type="number" id="age"><br>
+        <button type="submit">Predict</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("diabetesForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const features = [
+                parseFloat(document.getElementById("pregnancies").value),
+                parseFloat(document.getElementById("glucose").value),
+                parseFloat(document.getElementById("bp").value),
+                parseFloat(document.getElementById("skin").value),
+                parseFloat(document.getElementById("insulin").value),
+                parseFloat(document.getElementById("bmi").value),
+                parseFloat(document.getElementById("dpf").value),
+                parseFloat(document.getElementById("age").value)
+            ];
+
+            async function predictDiabetes(features) {
+                console.log("Sending request with features:", features);
+            
+                try {
+                    const response = await fetch("http://127.0.0.1:5500/predict", {  
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ features: features })
+                    });
+            
+                    console.log("Response received:", response);
+            
+                    const data = await response.json();  // Convert response to JSON
+                    console.log("Prediction result:", data);
+            
+                    // Display the prediction result on the webpage
+                    document.getElementById("result").innerHTML = "Prediction:"+data.prediction;
+            
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            }            
+        });
+    </script>
+</body>
+</html>
