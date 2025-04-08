@@ -8,7 +8,7 @@ model = pickle.load(open('trained_model/model.pkl', 'rb'))
 scaler = pickle.load(open('trained_model/scaler.pkl', 'rb'))
 
 app = Flask(__name__)
-CORS(app,origins=["https://sriganesh-73.github.io/Sample_Project_Deployment/"])
+CORS(app,origins=["https://sriganesh-73.github.io"])
 # Serve index.html
 @app.route('/')
 def testing():
