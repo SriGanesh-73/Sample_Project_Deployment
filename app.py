@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pickle
 import numpy as np
 
@@ -7,6 +8,7 @@ model = pickle.load(open('trained_model/model.pkl', 'rb'))
 scaler = pickle.load(open('trained_model/scaler.pkl', 'rb'))
 
 app = Flask(__name__)
+CORS(app,origins=["https://sriganesh-73.github.io"])
 # Serve index.html
 @app.route('/')
 def testing():
