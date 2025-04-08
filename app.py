@@ -4,8 +4,8 @@ import pickle
 import numpy as np
 
 # Load the model and scaler
-model = pickle.load(open('../trained_model/model.pkl', 'rb'))
-scaler = pickle.load(open('../trained_model/scaler.pkl', 'rb'))
+model = pickle.load(open('trained_model/model.pkl', 'rb'))
+scaler = pickle.load(open('trained_model/scaler.pkl', 'rb'))
 
 app = Flask(__name__)
 CORS(app)
